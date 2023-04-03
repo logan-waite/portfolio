@@ -1,0 +1,11 @@
+.navLink {
+    margin-left: var(--padding-2x);
+}
+
+.active {
+    color: var(--accent-color);
+}
+
+.navLink:hover {
+    color: var(--accent-color);
+}

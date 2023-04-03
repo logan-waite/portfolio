@@ -1,0 +1,20 @@
+.navbarWrapper {
+    position: fixed;
+    width: 100%;
+    left: 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--padding-2x) var(--padding-3x);
+    align-items: baseline;
+    width: 100%;
+    max-width: var(--max-width);
+    margin: auto;
+}
+
+.brand {
+    font-size: 24px;
+}
+

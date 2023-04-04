@@ -1,0 +1,87 @@
+.homeSection {
+    display: flex;
+    width: 100%;
+    flex: 1;
+}
+
+.left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title {
+    font-size: 60px;
+    margin: var(--padding-1x) 0;
+}
+
+.subtitle {
+    font-size: 30px;
+    /* color: var(--accent-color); */
+    margin: var(--padding-1x) 0;
+}
+
+.socialLinks {
+    color: var(--accent-color);
+    display: flex;
+    width: 175px;
+    justify-content: space-between;
+    margin: var(--padding-1x) 0;
+}
+
+.socialLink {
+    border: 2px solid var(--accent-color);
+    font-size: 16px;
+    display: flex;
+    width: fit-content;
+    padding: 8px;
+    border-radius: 50px;
+    justify-content: center;
+    align-items: center;
+    transition: box-shadow .25s, background-color .25s, color .25s;
+}
+
+.socialLink:hover {
+    background-color: var(--accent-color);
+    color: var(--black);
+    box-shadow: 0px 0px 10px 1px var(--accent-color);
+}
+
+.socialLink:focus-visible {
+    outline: none;
+    box-shadow: 0px 0px 15px 2px var(--accent-color);
+}
+
+.downloadButton {
+    margin: var(--padding-1x) 0;
+    width: fit-content;
+    background: var(--accent-color);
+    color: black;
+    /* background: none; */
+    border: 1px solid var(--accent-color);
+    padding: 0.5rem 0.75rem;
+    border-radius: 50px;
+    /* color: var(--accent-color); */
+    box-shadow: 0px 0px 10px 1px var(--accent-color);
+    font-size: 16px;
+    transition: box-shadow .25s;
+}
+
+.downloadButton:hover {
+    box-shadow: 0px 0px 0px 0px var(--accent-color);
+}
+
+.downloadButton:active {
+    border-color: var(--black);
+    box-shadow: 0px 0px 5px 0px inset var(--black);
+}
+
+.downloadButton:focus-visible {
+    outline: none;
+    box-shadow: 0px 0px 15px 2px var(--accent-color);
+}
+
+.right {
+    flex: 1;
+}

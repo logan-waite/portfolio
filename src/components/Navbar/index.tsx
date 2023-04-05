@@ -11,7 +11,7 @@ export default function Navbar() {
                     <NavLink scroll={false} href="/#home">
                         Home
                     </NavLink>
-                    <NavLink scroll={false} href="/#about">
+                    {/* <NavLink scroll={false} href="/#about">
                         About
                     </NavLink>
                     <NavLink scroll={false} href="/#skills">
@@ -22,7 +22,7 @@ export default function Navbar() {
                     </NavLink>
                     <NavLink scroll={false} href="/#contact">
                         Contact
-                    </NavLink>
+                    </NavLink> */}
                 </div>
             </nav>
         </div>

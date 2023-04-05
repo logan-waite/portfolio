@@ -22,6 +22,10 @@
     margin: var(--padding-1x) 0;
 }
 
+.blurb {
+    margin: var(--padding-1x) 0;
+}
+
 .socialLinks {
     color: var(--accent-color);
     display: flex;

@@ -24,7 +24,7 @@ export default function Home() {
             <PageSection id="home">
                 <HomeSection />
             </PageSection>
-            <PageSection id="about">
+            {/* <PageSection id="about">
                 <AboutSection />
             </PageSection>
             <PageSection id="skills">
@@ -35,7 +35,7 @@ export default function Home() {
             </PageSection>
             <PageSection id="contact">
                 <ContactSection />
-            </PageSection>
+            </PageSection> */}
         </>
     );
 }

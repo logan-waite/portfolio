@@ -2,12 +2,14 @@
     position: fixed;
     width: 100%;
     left: 0;
+    background-color: var(--background-color);
+    z-index: 1000;
 }
 
 .navbar {
     display: flex;
     justify-content: space-between;
-    padding: var(--padding-2x) var(--padding-3x);
+    padding: var(--padding-2x) var(--padding-massive);
     align-items: baseline;
     width: 100%;
     max-width: var(--max-width);

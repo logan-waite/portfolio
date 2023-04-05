@@ -23,6 +23,11 @@ export default function HomeSection() {
             <div className={styles.left}>
                 <h1 className={styles.title}>Logan Waite</h1>
                 <h3 className={styles.subtitle}>Front End Web Developer</h3>
+                <p className={styles.blurb}>
+                    I'm a software engineer who enjoys building things that
+                    people enjoy using. Clean, beautiful user interfaces built
+                    with efficient, readable code is the ideal I strive for.
+                </p>
                 <div className={styles.socialLinks}>
                     <SocialLink
                         href="https://www.github.com/logan-waite"
@@ -41,9 +46,15 @@ export default function HomeSection() {
                         icon="instagram"
                     />
                 </div>
-                <button type="button" className={styles.downloadButton}>
-                    Download Resume
-                </button>
+                <a
+                    href="/files/resume.pdf"
+                    download="Logan Waite - Resume 2023"
+                    target="_blank"
+                >
+                    <button type="button" className={styles.downloadButton}>
+                        Download Resume
+                    </button>
+                </a>
             </div>
             <div className={styles.right}>
                 <svg className={styles.clipPath}></svg>

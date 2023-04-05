@@ -24,9 +24,9 @@ export default function HomeSection() {
                 <h1 className={styles.title}>Logan Waite</h1>
                 <h3 className={styles.subtitle}>Front End Web Developer</h3>
                 <p className={styles.blurb}>
-                    I'm a software engineer who enjoys building things that
+                    {`I'm a software engineer who enjoys building things that
                     people enjoy using. Clean, beautiful user interfaces built
-                    with efficient, readable code is the ideal I strive for.
+                    with efficient, readable code is the ideal I strive for.`}
                 </p>
                 <div className={styles.socialLinks}>
                     <SocialLink

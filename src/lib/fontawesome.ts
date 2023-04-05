@@ -6,6 +6,4 @@ import {
     faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 
-console.log("hello?");
-
 library.add(faGithub, faTwitter, faLinkedinIn, faInstagram);

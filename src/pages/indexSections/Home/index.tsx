@@ -1,12 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./styles.module.css";
 import Link from "next/link";
-import {
-    IconProp,
-    IconPrefix,
-    IconDefinition,
-    IconName,
-} from "@fortawesome/fontawesome-svg-core";
+import { IconName } from "@fortawesome/fontawesome-svg-core";
+import Image from "next/image";
 
 type SocialLinkProps = {
     href: string;
@@ -17,9 +13,7 @@ export default function HomeSection() {
     function SocialLink({ href, icon }: SocialLinkProps) {
         return (
             <Link href={href} className={styles.socialLink}>
-                {/* <span> */}
                 <FontAwesomeIcon icon={["fab", icon]} />
-                {/* </span> */}
             </Link>
         );
     }
@@ -51,7 +45,30 @@ export default function HomeSection() {
                     Download Resume
                 </button>
             </div>
-            <div className={styles.right}></div>
+            <div className={styles.right}>
+                <svg className={styles.clipPath}></svg>
+                <div className={styles.headshot}>
+                    <div className={styles.background}>
+                        <svg id="circle">
+                            <defs>
+                                <clipPath id="headshotMask">
+                                    <rect width="400" height="100"></rect>
+                                    <circle cx="200" cy="250" r="200"></circle>
+                                </clipPath>
+                            </defs>
+                            <circle cx="200" cy="200" r="200"></circle>
+                        </svg>
+                    </div>
+                    <div className={styles.foreground}>
+                        <Image
+                            src="/images/headshot.png"
+                            alt="Photo of Logan Waite"
+                            width="400"
+                            height="659"
+                        ></Image>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

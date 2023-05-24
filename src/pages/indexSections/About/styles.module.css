@@ -1,0 +1,91 @@
+.aboutSection {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.left {
+    flex: 1;
+    color: var(--accent-color)
+}
+
+.iconContainer {
+    display: flex;
+    gap: 2em;
+    transition: transform var(--animation-timing);
+    position: relative;
+    margin-left: -50%;
+}
+
+.icon {
+    position: absolute;
+    height: 40px;
+    transition: height var(--animation-timing), transform var(--animation-timing), left var(--animation-timing), top var(--animation-timing), opacity var(--animation-timing);
+    cursor: pointer;
+    color: var(--accent-color);
+    opacity: 0.5;
+}
+
+.icon:not(.activeIcon):hover {
+    /* filter: drop-shadow(0px 0px 5px var(--accent-color)); */
+    /* color: white; */
+    opacity: 0.75;
+}
+
+.activeIcon {
+    height: 100px;
+    color: var(--accent-color);
+    opacity: 1;
+    cursor: initial;
+    /* filter: drop-shadow(0px 0px 4px var(--accent-color)); */
+    /* box-shadow: 0px 0px 10px 1px var(--accent-color); */
+}
+
+.visibleIcon {
+    display: block;
+}
+
+.right {
+    /* height: 250px; */
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    margin-top: -45px;
+
+}
+
+.itemTitle {
+    margin-bottom: 15px;
+}
+
+.itemTextContainer {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.borderContainer {
+    transition: height var(--animation-timing);
+    border: 2px solid var(--accent-color);
+    border-radius: 5px;
+    box-shadow: 15px 15px 0px var(--accent-color);
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+.itemText {
+    padding: 15px;
+    transition: opacity var(--animation-timing);
+    /* margin-right: 15px; */
+}
+
+.itemTextReference {
+    position: absolute;
+    left: 0;
+    visibility: hidden;
+    padding: 15px;
+    border: 1px solid red;
+}

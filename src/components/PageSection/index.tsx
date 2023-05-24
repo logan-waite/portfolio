@@ -9,7 +9,6 @@ export default function PageSection({
 }: PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>>) {
     return (
         <section className={styles.pageSection} {...props}>
-            <div className={styles.pageSectionSpacer}></div>
             {children}
         </section>
     );

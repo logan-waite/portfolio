@@ -2,8 +2,5 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-}
-
-.pageSectionSpacer {
-    height: 70px;
+    padding-top: 70px;
 }

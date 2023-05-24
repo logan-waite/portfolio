@@ -1,6 +1,8 @@
 import Link from "next/link";
 import styles from "./styles.module.css";
 import NavLink from "@/components/NavLink";
+import pageList from "@/lib/pageList";
+import { toTitleCase } from "@/lib/utils";
 
 export default function Navbar() {
     return (
@@ -8,21 +10,15 @@ export default function Navbar() {
             <nav className={styles.navbar}>
                 <div className={styles.brand}>Portfolio</div>
                 <div className={styles.links}>
-                    <NavLink scroll={false} href="/#home">
-                        Home
-                    </NavLink>
-                    {/* <NavLink scroll={false} href="/#about">
-                        About
-                    </NavLink>
-                    <NavLink scroll={false} href="/#skills">
-                        Skills
-                    </NavLink>
-                    <NavLink scroll={false} href="/#portfolio">
-                        Portfolio
-                    </NavLink>
-                    <NavLink scroll={false} href="/#contact">
-                        Contact
-                    </NavLink> */}
+                    {pageList.map((page) => (
+                        <NavLink
+                            scroll={false}
+                            href={`/#${page.id}`}
+                            key={page.id}
+                        >
+                            {toTitleCase(page.id)}
+                        </NavLink>
+                    ))}
                 </div>
             </nav>
         </div>

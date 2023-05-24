@@ -5,6 +5,7 @@ import AboutSection from "./indexSections/About";
 import SkillsSection from "./indexSections/Skills";
 import PortfolioSection from "./indexSections/Portfolio";
 import ContactSection from "./indexSections/Contact";
+import pageList from "@/lib/pageList";
 
 export default function Home() {
     return (
@@ -21,21 +22,11 @@ export default function Home() {
                 />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <PageSection id="home">
-                <HomeSection />
-            </PageSection>
-            {/* <PageSection id="about">
-                <AboutSection />
-            </PageSection>
-            <PageSection id="skills">
-                <SkillsSection />
-            </PageSection>
-            <PageSection id="portfolio">
-                <PortfolioSection />
-            </PageSection>
-            <PageSection id="contact">
-                <ContactSection />
-            </PageSection> */}
+            {pageList.map((page) => (
+                <PageSection id={page.id} key={page.id}>
+                    {page.component}
+                </PageSection>
+            ))}
         </>
     );
 }

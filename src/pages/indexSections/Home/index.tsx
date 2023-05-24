@@ -22,6 +22,7 @@ export default function HomeSection() {
         <div className={styles.homeSection}>
             <div className={styles.left}>
                 <h1 className={styles.title}>Logan Waite</h1>
+                {/* Full Stack Web Developer, UX/UI Enthusiast, Javascript Specialist*/}
                 <h3 className={styles.subtitle}>Front End Web Developer</h3>
                 <p className={styles.blurb}>
                     {`I'm a software engineer who enjoys building things that

@@ -155,7 +155,7 @@ function AboutMeIconSelector({
             }
 
             const isVisible = visibleIndexes.includes(i);
-            const height = section.active ? 80 : isVisible ? 40 : 10;
+            const height = section.active ? 80 : isVisible ? 40 : 1;
             const top = section.active ? 0 : isVisible ? 20 : 40;
             const left =
                 currentIndex === i

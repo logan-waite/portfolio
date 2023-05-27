@@ -1,4 +1,4 @@
-import useInterval from "@/lib/useInterval";
+import useInterval from "@/lib/hooks/useInterval";
 import { IconName } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";

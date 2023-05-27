@@ -11,7 +11,8 @@ import {
 } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconName } from "@fortawesome/fontawesome-svg-core";
-import { joinClassNames } from "@/lib/utils";
+import { createArray, joinClassNames } from "@/lib/utils";
+import { useWindowSize } from "@/lib/hooks/useWindowSize";
 
 type ItemSection = {
     icon: IconName;
@@ -59,6 +60,23 @@ function findVisibleIndexes(length: number, i: number) {
     return [upper, lower, i];
 }
 
+function findIndexPositions(currentIndex: number, length: number) {
+    let position = -Math.floor(length / 2);
+    return createArray(length, (_, i) => i).reduce((orderedIndexes, index) => {
+        let newIndex = currentIndex + position;
+
+        if (newIndex < 0) {
+            newIndex += length;
+        } else if (newIndex >= length) {
+            newIndex -= length;
+        }
+
+        orderedIndexes.push(newIndex);
+        position += 1;
+        return orderedIndexes;
+    }, [] as number[]);
+}
+
 type SideIconProps = {
     onClick: () => void;
     icon: IconName;
@@ -81,12 +99,17 @@ function SideIcon({ onClick, icon, active, ...props }: SideIconProps) {
 type AboutMeIconSelectorProps = {
     updateItems: (index: number) => void;
     items: ItemSection[];
+    isMobile: boolean;
 };
 
 type CSSStylesWithVars = React.CSSProperties &
     Record<`--${string}`, number | string>;
 
-function AboutMeIconSelector({ updateItems, items }: AboutMeIconSelectorProps) {
+function AboutMeIconSelector({
+    updateItems,
+    items,
+    isMobile,
+}: AboutMeIconSelectorProps) {
     const currentActiveIndex = items.findIndex((b) => b.active);
     const [rotation, setRotation] = useState(0);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -98,18 +121,93 @@ function AboutMeIconSelector({ updateItems, items }: AboutMeIconSelectorProps) {
     const step = (2 * Math.PI) / items.length;
 
     function handleClick(i: number) {
-        if (i === items.length - 1 && currentIndex === 0) {
-            setRotation(rotation - step);
-        } else if (i === 0 && currentIndex === items.length - 1) {
-            setRotation(rotation + step);
-        } else if (i > currentIndex) {
-            setRotation(rotation + step);
-        } else if (i < currentIndex) {
-            setRotation(rotation - step);
+        if (!isMobile) {
+            if (i === items.length - 1 && currentIndex === 0) {
+                setRotation(rotation - step);
+            } else if (i === 0 && currentIndex === items.length - 1) {
+                setRotation(rotation + step);
+            } else if (i > currentIndex) {
+                setRotation(rotation + step);
+            } else if (i < currentIndex) {
+                setRotation(rotation - step);
+            }
         }
         setCurrentIndex(i);
         updateItems(i);
         setVisibleIndexes(findVisibleIndexes(items.length, i));
+    }
+
+    let selectionIcons;
+    if (isMobile) {
+        const positions = findIndexPositions(currentIndex, items.length);
+        selectionIcons = items.map((section, i) => {
+            let toLeft, toRight;
+            if (
+                positions.findIndex((p) => p === i) <
+                Math.floor(items.length / 2)
+            ) {
+                toLeft = true;
+            } else if (
+                positions.findIndex((p) => p === i) >
+                Math.floor(items.length / 2)
+            ) {
+                toRight = true;
+            }
+
+            const isVisible = visibleIndexes.includes(i);
+            const height = section.active ? 80 : isVisible ? 40 : 10;
+            const top = section.active ? 0 : isVisible ? 20 : 40;
+            const left =
+                currentIndex === i
+                    ? containerSize / 2 - 40
+                    : isVisible && toLeft
+                    ? 0
+                    : isVisible && toRight
+                    ? containerSize - 50
+                    : toLeft
+                    ? -(containerSize / 2)
+                    : containerSize + containerSize / 2;
+            // console.log({ left });
+            return (
+                <SideIcon
+                    key={i}
+                    onClick={() => handleClick(i)}
+                    icon={section.icon}
+                    active={section.active}
+                    style={{
+                        top: top + "px",
+                        left: left + "px",
+                        height: height + "px",
+                    }}
+                />
+            );
+        });
+    } else {
+        selectionIcons = items.map((section, i) => {
+            const angle = step * i;
+            const isVisible = visibleIndexes.includes(i);
+            const height = section.active ? 100 : isVisible ? 40 : 1;
+            const left = Math.round(
+                containerSize / 2 + radius * Math.cos(angle) - height / 2
+            );
+            const top = Math.round(
+                containerSize / 2 + radius * Math.sin(angle) - height / 2
+            );
+            return (
+                <SideIcon
+                    key={i}
+                    onClick={() => handleClick(i)}
+                    icon={section.icon}
+                    active={section.active}
+                    style={{
+                        top: top + "px",
+                        left: left + "px",
+                        transform: `rotate(${rotation}rad)`,
+                        height: height + "px",
+                    }}
+                />
+            );
+        });
     }
 
     return (
@@ -117,46 +215,25 @@ function AboutMeIconSelector({ updateItems, items }: AboutMeIconSelectorProps) {
             className={styles.iconContainer}
             style={{
                 width: containerSize + "px",
-                height: containerSize + "px",
+                height: (isMobile ? 100 : containerSize) + "px",
                 transform: `rotate(${-rotation}rad)`,
             }}
         >
-            {items.map((section, i) => {
-                const angle = step * i;
-                const isVisible = visibleIndexes.includes(i);
-                const height = section.active ? 100 : isVisible ? 40 : 1;
-                const left = Math.round(
-                    containerSize / 2 + radius * Math.cos(angle) - height / 2
-                );
-                const top = Math.round(
-                    containerSize / 2 + radius * Math.sin(angle) - height / 2
-                );
-                return (
-                    <SideIcon
-                        key={i}
-                        onClick={() => handleClick(i)}
-                        icon={section.icon}
-                        active={section.active}
-                        style={{
-                            top: top + "px",
-                            left: left + "px",
-                            transform: `rotate(${rotation}rad)`,
-                            height: height + "px",
-                        }}
-                    />
-                );
-            })}
+            {selectionIcons}
         </div>
     );
 }
 
 export default function AboutSection() {
+    const windowSize = useWindowSize();
     const [items, setItems] = useState(itemSections);
     const [height, setHeight] = useState(0);
     const [itemText, setItemText] = useState<string | undefined>("");
     const [opacity, setOpacity] = useState(0);
     const itemTextRef = useRef<HTMLParagraphElement>(null);
     const animationTiming = 0.75;
+
+    const isMobile = (windowSize.width ?? 0) < 768;
 
     function updateItems(index: number) {
         const updatedItems = items.map((item, i) => ({
@@ -190,7 +267,11 @@ export default function AboutSection() {
             }
         >
             <div className={styles.left}>
-                <AboutMeIconSelector updateItems={updateItems} items={items} />
+                <AboutMeIconSelector
+                    isMobile={isMobile}
+                    updateItems={updateItems}
+                    items={items}
+                />
             </div>
             <div className={styles.right}>
                 <h1 className={styles.itemTitle}>{activeItem?.title}</h1>

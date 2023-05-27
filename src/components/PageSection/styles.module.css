@@ -4,3 +4,10 @@
     flex-direction: column;
     padding-top: 70px;
 }
+
+@media (max-width: 768px) {
+    .pageSection {
+        height: auto;
+        min-height: 100vh;   
+    }
+}

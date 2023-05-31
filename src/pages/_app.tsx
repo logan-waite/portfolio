@@ -4,6 +4,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import { Inter } from "next/font/google";
 import type { AppProps } from "next/app";
 import MainLayout from "@/layouts/MainLayout";
+import { NavProvider } from "@/lib/contexts/NavContext";
 import { config } from "@fortawesome/fontawesome-svg-core";
 
 config.autoAddCss = false;
@@ -18,9 +19,11 @@ export default function App({ Component, pageProps }: AppProps) {
                     font-family: ${inter.style.fontFamily};
                 }
             `}</style>
-            <MainLayout>
-                <Component {...pageProps} />
-            </MainLayout>
+            <NavProvider>
+                <MainLayout>
+                    <Component {...pageProps} />
+                </MainLayout>
+            </NavProvider>
         </>
     );
 }

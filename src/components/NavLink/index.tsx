@@ -1,15 +1,14 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useContext } from "react";
 import Link, { LinkProps } from "next/link";
 import { joinClassNames } from "@/lib/utils";
 import styles from "./styles.module.css";
-import { useRouter } from "next/router";
+import NavContext from "@/lib/contexts/NavContext";
 
 type NavLinkProps = LinkProps & { children: ReactNode };
 
 export default function NavLink({ href, children, ...props }: NavLinkProps) {
-    const router = useRouter();
-    const isActive =
-        router.asPath === href || (router.asPath === "/" && href === "/#home");
+    const { activeLink } = useContext(NavContext);
+    const isActive = activeLink === href.toString().substring(2);
     return (
         <Link
             className={joinClassNames(
